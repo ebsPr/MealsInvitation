@@ -1,0 +1,95 @@
+<ion-header color="color1">
+  <ion-navbar>
+    <ion-title>
+      Crear nueva invitación
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="new-content">
+
+
+  <ion-card class="new-card-content">
+    <ion-card-header class="new-card-main-header">
+      Seleccion de fechas 
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="new-card-content">
+        <ion-label floating>Fecha Inicio</ion-label>
+        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="initDate" (ionChange)='updateArrayDays()' ></ion-datetime>
+      </ion-item>
+
+      <ion-item class="new-card-content">
+        <ion-label floating>FechaFin</ion-label>
+        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="endDate"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="new-card-content">
+    <ion-card-header class="new-card-main-header">
+      Selección de comidas
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Día</ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-sunny" md="md-sunny"></ion-icon>
+          </ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-moon" md="md-moon"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row *ngFor="let day of arrayDays;let i = index">
+          <ion-col col-4>{{day.date | date:"EEEE d"}}</ion-col>
+          <ion-col col-4>
+            <ion-checkbox color="dark" [ngModel]="day.lunch"></ion-checkbox>
+          </ion-col>
+          <ion-col col-4>
+            <ion-checkbox color="dark" [ngModel]="day.dinner"></ion-checkbox>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card class="new-card-content">
+    <ion-card-header class="new-card-main-header">
+      Selección de gochos
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Persona</ion-col>
+          <ion-col col-8>
+            <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+            <ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let g of gochosService.getGochos()">
+          <ion-col col-4>{{g.name}}</ion-col>
+          <ion-col col-8>
+            <ion-checkbox color="dark" checked="true"></ion-checkbox>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="save()">
+        <!-- <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon> -->
+        <ion-icon ios="ios-share-alt" md="md-share-alt"></ion-icon>
+
+    </button>
+  </ion-fab>
+  
+</ion-content>

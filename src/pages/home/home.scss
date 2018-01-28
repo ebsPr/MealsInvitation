@@ -1,0 +1,30 @@
+page-home {
+    .home-content{
+        background-color: color($colors,color4);
+        text-align: center;
+    }
+
+    .toolbar-background {
+        background-color: color($colors,color1);
+    }
+    .toolbar-title {
+        color: color($colors,light);
+    }
+
+    .home-card{
+        background-color: color($colors,color5);
+    }
+
+    .home-card-header{
+        background-color: color($colors,color2Alpha);
+        font-weight: bold;
+    }
+    .home-card-main-header{
+        background-color: color($colors,color2);
+        color: color($colors,light);
+    }
+    .home-card-content{
+        background-color: color($colors,color6);
+    }
+}
+  

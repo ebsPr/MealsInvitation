@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Person } from "../classes/person.classes";
 
 @Injectable()
 export class GochosService {
@@ -7,12 +8,12 @@ export class GochosService {
 
     }
 
-    getGochos(){
+    getGochos():Person[]{
         return [
-            { id: 1, name: 'Iván'},
-            { id: 2, name : 'Yago'},
-            { id: 3, name: 'Ángel'},
-            { id: 4, name: 'Víctor'}
+            { id: '1', name: 'Iván',selected:true,attendance:null},
+            { id: '2', name : 'Yago',selected:true,attendance:null},
+            { id: '3', name: 'Ángel',selected:true,attendance:null},
+            { id: '4', name: 'Víctor',selected:true,attendance:null}
         ]
     }
 }

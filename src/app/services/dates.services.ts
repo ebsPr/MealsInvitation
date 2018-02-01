@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Day } from '../classes/day.classes';
 // import { Day } from "../classes/day.classes";
 
 @Injectable()
@@ -8,7 +9,7 @@ export class DatesService {
 
     }
 
-    getArrayDayObjects(startDate: Date, endDate: Date){
+    getArrayDayObjects(startDate: Date, endDate: Date): Day[]{
         let result = new Array();
         let dates = [];
         let currentDate = startDate;
@@ -21,8 +22,8 @@ export class DatesService {
             dates.push(currentDate);
             result.push({
                 date:currentDate,
-                lunch:true,
-                dinner:true
+                lunch: { activated: true } ,
+                dinner: { activated: true } 
             });
             currentDate = addDays.call(currentDate, 1);
         }

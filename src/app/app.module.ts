@@ -4,10 +4,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { NewPage } from "../pages/new/new";
 
+import { FirebaseService } from "./services/firebase.services";
 import { DatesService } from "./services/dates.services";
 import { GochosService } from "./services/gochos.services";
 
@@ -19,6 +23,9 @@ import { GochosService } from "./services/gochos.services";
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -32,6 +39,7 @@ import { GochosService } from "./services/gochos.services";
     SplashScreen,
     DatesService,
     GochosService,
+    FirebaseService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

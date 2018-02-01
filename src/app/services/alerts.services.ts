@@ -30,7 +30,7 @@ export class AlertsService {
           });
     }
 
-    getDeleteMeal(handlerOk,handlerKo){
+    getAlertDeleteMeal(handlerOk,handlerKo){
         return this.alertCtrl.create({
             title: '¿Eliminar esta comida?',
             message: 'Vas a eliminar la comida del finde XXX a XXX, ¿estás segura?',
@@ -52,4 +52,24 @@ export class AlertsService {
           });
     }
 
+    getAlertValidationDates(){
+      return this.alertCtrl.create({
+        title: 'Use this lightsaber?',
+        message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+        buttons: [
+          {
+            text: 'Disagree',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Agree',
+            handler: () => {
+              console.log('Agree clicked');
+            }
+          }
+        ]
+      });
+    }
 }

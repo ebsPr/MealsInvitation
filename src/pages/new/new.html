@@ -16,7 +16,7 @@
     <ion-card-content>
       <ion-item class="new-card-content">
         <ion-label floating>Fecha Inicio</ion-label>
-        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="initDate" name="initDate" (ionChange)='updateArrayDays()' ></ion-datetime>
+        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="initDate" name="initDate" (ionChange)='updateArrayDays();validateDate()' ></ion-datetime>
       </ion-item>
 
       <ion-item class="new-card-content">

@@ -34,12 +34,17 @@ export class DatesService {
         return result;
     }
 
-    getNextWeekend(){
+    getNextWeekend(dataWeekends){
         // days until next friday
         let diff = 5 - moment().day();
         
         // dates in moment format
         let nextFriday = moment().add(diff, 'days');
+
+        if(!this.validateDates(dataWeekends,nextFriday.toDate())){
+            nextFriday = this.getNextFridayFree(dataWeekends,nextFriday);
+        }
+
         let nextSunday = nextFriday.clone().add(2, 'days');
 
         // parse dates for view
@@ -51,5 +56,24 @@ export class DatesService {
         }; 
 
         return result;
+    }
+
+    // recursive method to get the first free friday
+    getNextFridayFree(dataWeekends,date){
+        console.log('getNextFridayFree',date)
+        if(!this.validateDates(dataWeekends,date.toDate())){
+            return this.getNextFridayFree(dataWeekends,date.add(7,'days'))
+        }else{
+            console.log('getNextFridayFree return ',date)
+            return date;
+        }
+    }
+
+    validateDates(dataWeekends,date){
+        return  dataWeekends.find(x => {
+            let date1 = moment(x.date).format(this.formatEEUU);
+            let date2 = moment(date).format(this.formatEEUU);
+            return date1 === date2
+          }) === undefined;
     }
 }

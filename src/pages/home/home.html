@@ -17,7 +17,7 @@
                 <ion-row>
                     <!-- header col -->
                     <ion-col col-10>
-                        Del viernes 26 al domingo 28
+                        {{meals[key] | datemeal}}
                     </ion-col>
                     <ion-col col-2>
                             <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
@@ -31,7 +31,7 @@
             <ion-card class="home-card-content" *ngFor="let day of meals[key]">
                 <ion-card-header class="home-card-header">
                     <span>
-                        {{day.date |  date:"EEEE d"}}
+                        {{day.date | date:"EEEE d"}}
                     </span>
                 </ion-card-header>
                 <ion-card-content>

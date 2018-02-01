@@ -10,8 +10,7 @@
 
 
     <!-- start planning -->
-    <ion-card class="home-card">
-
+    <ion-card class="home-card" *ngFor="let key of meals | keys">
         <!-- header planning -->
         <ion-card-header class="home-card-main-header">
             <ion-grid>
@@ -26,18 +25,20 @@
                 </ion-row>
             </ion-grid>
         </ion-card-header>
+
         <ion-card-content>
-
             <!-- first item list -->
-            <ion-card class="home-card-content">
+            <ion-card class="home-card-content" *ngFor="let day of meals[key]">
                 <ion-card-header class="home-card-header">
-                    Viernes 26
+                    <span>
+                        {{day.date |  date:"EEEE d"}}
+                    </span>
                 </ion-card-header>
                 <ion-card-content>
 
                     <ion-grid>
+                        <!-- header col -->
                         <ion-row>
-                            <!-- header col -->
                             <ion-col col-4>
                                 <ion-icon ios="ios-person" md="md-person"></ion-icon>
                             </ion-col>
@@ -50,298 +51,32 @@
                         </ion-row>
 
                         <!-- col values -->
-                        <ion-row>
+                        <ion-row *ngFor="let p of gochos">
                             <ion-col col-4>
-                                Iván
+                                {{p.name}}
                             </ion-col>
                             <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                                <span *ngIf="day.lunch.activated">
+                                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.lunch.people,p.id)"></ion-icon>
+                                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="!thumbs(day.lunch.people,p.id)"></ion-icon>
+                                </span>
+                                <span *ngIf="!day.lunch.activated">
+                                    <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
+                                </span>
                             </ion-col>
                             <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Victor
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Ángel
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Yago
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-
-
-                    </ion-grid>
-
-
-                </ion-card-content>
-            </ion-card>
-
-            <ion-card class="home-card-content">
-                <ion-card-header class="home-card-header">
-                    Sábado 27
-                </ion-card-header>
-                <ion-card-content>
-
-                    <ion-grid>
-                        <ion-row>
-                            <!-- header col -->
-                            <ion-col col-4>
-                                <ion-icon ios="ios-person" md="md-person"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-sunny" md="md-sunny"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-moon" md="md-moon"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- col values -->
-                        <ion-row>
-                            <ion-col col-4>
-                                Iván
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Victor
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Ángel
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Yago
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                                <span *ngIf="day.dinner.activated">
+                                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.dinner.people,p.id)"></ion-icon>
+                                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="!thumbs(day.dinner.people,p.id)"></ion-icon>
+                                </span>
+                                <span *ngIf="!day.dinner.activated">
+                                    <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
+                                </span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                </ion-card-content>
-            </ion-card>
-        </ion-card-content>
-    </ion-card>
 
-    <ion-card class="home-card">
 
-        <!-- header planning -->
-        <ion-card-header class="home-card-main-header">
-            Gorroneo del viernes 2 al domingo 4
-        </ion-card-header>
-        <ion-card-content>
-
-            <!-- first item list -->
-            <ion-card class="home-card-content">
-                <ion-card-header class="home-card-header">
-                    Viernes 2
-                </ion-card-header>
-                <ion-card-content>
-
-                    <ion-grid>
-                        <ion-row>
-                            <!-- header col -->
-                            <ion-col col-4>
-                                <ion-icon ios="ios-person" md="md-person"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-sunny" md="md-sunny"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-moon" md="md-moon"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- col values -->
-                        <ion-row>
-                            <ion-col col-4>
-                                Iván
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Victor
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Ángel
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Yago
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-
-            <ion-card class="home-card-content">
-                <ion-card-header class="home-card-header">
-                    Sábado 3
-                </ion-card-header>
-                <ion-card-content>
-
-                    <ion-grid>
-                        <ion-row>
-                            <!-- header col -->
-                            <ion-col col-4>
-                                <ion-icon ios="ios-person" md="md-person"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-sunny" md="md-sunny"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-moon" md="md-moon"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- col values -->
-                        <ion-row>
-                            <ion-col col-4>
-                                Iván
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Victor
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Ángel
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                Yago
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-help" md="md-help"></ion-icon>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
                 </ion-card-content>
             </ion-card>
         </ion-card-content>

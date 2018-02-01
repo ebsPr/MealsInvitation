@@ -15,11 +15,14 @@ import { FirebaseService } from "./services/firebase.services";
 import { DatesService } from "./services/dates.services";
 import { GochosService } from "./services/gochos.services";
 
+import { KeysPipe } from "./pipes/keys.pipes";
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NewPage
+    NewPage,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

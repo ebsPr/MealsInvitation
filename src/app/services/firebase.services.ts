@@ -26,12 +26,25 @@ export class FirebaseService {
             d.lunch.people = Array.from(people);
         }
         let body = JSON.stringify(arrayDays);
-        console.log('body',body)
+        
         return this.http.post(this.url+'.json',body, {headers:this.headers})
-        .map( res => {
-          console.log(res.json())
-          return res.json()
-        });
+            .map( res => {
+            console.log(res.json())
+            return res.json()
+            });
+    }
+
+    // get meals between two dates
+    getMeals(){
+        return this.http.get(this.url +'.json').map( res => res.json());
+    }
+
+    // update meal
+
+    // delete
+    deleteMeal(key$){
+        let url = `${this.url}/${key$}.json`;
+        this.http.delete(url).map( res => res.json());
     }
 
 

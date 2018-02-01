@@ -21,6 +21,7 @@ export class HomePage implements OnInit{
   meals:Day[];
   gochos:Person[];
 
+  loading:boolean = true;
 
   constructor(
     public navCtrl: NavController, 
@@ -31,12 +32,12 @@ export class HomePage implements OnInit{
     private loadingCtrl: LoadingController,
   ) {
     console.log('constructor home')
-
     // get data from services
     this.firebaseService.getMeals()
       .subscribe( data => {
         this.meals = data
         console.log('constructor home data: ', data)
+        this.loading = false;
       });
     this.gochos = this.gochosService.getGochos();
   }

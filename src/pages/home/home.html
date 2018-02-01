@@ -6,11 +6,19 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home-content">
-
+<ion-content padding class="home-content" >
+    <span *ngIf="!loading">
+    <ion-card class="home-card" *ngIf="(meals | keys).length == 0">
+        <ion-card-header>
+            No hay comidas programadas
+        </ion-card-header>
+        <ion-card-content>
+            Para programar una comida, pulsa el botón de abajo a la derecha
+        </ion-card-content>
+    </ion-card>
 
     <!-- start planning -->
-    <ion-card class="home-card" *ngFor="let key of meals | keys">
+    <ion-card class="home-card" *ngFor="let key of meals | keys" >
         <!-- header planning -->
         <ion-card-header class="home-card-main-header">
             <ion-grid>
@@ -20,7 +28,7 @@
                         {{meals[key] | datemeal}}
                     </ion-col>
                     <ion-col col-2>
-                            <ion-icon ios="ios-trash" md="md-trash" (click)="deleteMeal(key)"></ion-icon>
+                        <ion-icon ios="ios-trash" md="md-trash" (click)="deleteMeal(key)"></ion-icon>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -81,6 +89,7 @@
             </ion-card>
         </ion-card-content>
     </ion-card>
+</span>
 
     <ion-fab right bottom>
         <button ion-fab color="light" (click)="newMeal()">

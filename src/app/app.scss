@@ -14,3 +14,30 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.alert-md{
+    .alert-wrapper {
+        background-color: color($colors,color4) ;
+    }
+    
+    .alert-head {
+        background-color: color($colors,color2) ;
+        color: color($colors,light);
+    }
+    
+    .alert-message {
+        padding-top: 1em ;
+        color: color($colors,dark) ;
+    }
+    
+    .alert-button {
+        background-color: color($colors,color2Alpha) ;
+        width: 100%  ;
+        margin-bottom:0.5em  ;
+        color: color($colors,dark) ;
+    }
+    
+    .button-inner{
+        justify-content: center !important; 
+    }
+}

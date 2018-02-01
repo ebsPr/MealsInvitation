@@ -22,6 +22,7 @@ import { NewPage } from "../pages/new/new";
 import { FirebaseService } from "./services/firebase.services";
 import { DatesService } from "./services/dates.services";
 import { GochosService } from "./services/gochos.services";
+import { AlertsService } from "./services/alerts.services";
 
 //PIPES
 import { KeysPipe } from "./pipes/keys.pipes";
@@ -53,6 +54,7 @@ import { DateMealPipe } from "./pipes/datemeal.pipes";
     SplashScreen,
     DatesService,
     GochosService,
+    AlertsService,
     FirebaseService,
     { provide: LOCALE_ID, useValue: 'es-ES' } ,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

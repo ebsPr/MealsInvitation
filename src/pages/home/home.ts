@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { NewPage } from "../new/new";
 
 import { FirebaseService } from "../../app/services/firebase.services";
 import { GochosService } from "../../app/services/gochos.services";
+import { AlertsService } from "../../app/services/alerts.services";
 
 import { Day } from "../../app/classes/day.classes";
 import { Person } from "../../app/classes/person.classes";
@@ -19,19 +21,23 @@ export class HomePage implements OnInit{
   meals:Day[];
   gochos:Person[];
 
+
   constructor(
     public navCtrl: NavController, 
     public alertCtrl: AlertController,
     public firebaseService: FirebaseService,
-    public gochosService: GochosService
+    public gochosService: GochosService,
+    private alertService: AlertsService,
+    private loadingCtrl: LoadingController,
   ) {
     console.log('constructor home')
 
     // get data from services
-    this.firebaseService.getMeals().subscribe( data => {
-      this.meals = data
-      console.log('constructor home data: ', data)
-    });
+    this.firebaseService.getMeals()
+      .subscribe( data => {
+        this.meals = data
+        console.log('constructor home data: ', data)
+      });
     this.gochos = this.gochosService.getGochos();
   }
 
@@ -51,26 +57,26 @@ export class HomePage implements OnInit{
 
   // method that calls delete service
   deleteMeal(key$){
-    let confirm = this.alertCtrl.create({
-      title: '¿Eliminar esta comida?',
-      message: 'Vas a eliminar la comida del finde XXX a XXX, ¿estás segura?',
-      buttons: [
-        {
-          text: 'No, me he equivocado!',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Si, elimina!',
-          handler: () => {
-            console.log('Agree clicked');
-            this.firebaseService.deleteMeal(key$).subscribe(data => console.log('delete ok ',data))
-            delete this.meals [key$]
-          }
-        }
-      ]
-    });
+    let handlerOk = () => {
+      let loader = this.loadingCtrl.create({
+        content: "Cargando..."
+      });
+      loader.present()
+      this.firebaseService.deleteMeal(key$)
+        .subscribe(data => {
+          console.log('delete ok ',data);
+          delete this.meals [key$]
+          loader.dismiss();
+        });
+      
+    }
+    handlerOk.bind(this);
+
+    let handlerKo = () => {
+      console.log('KO')
+    }
+
+    let confirm = this.alertService.getDeleteMeal(handlerOk,handlerKo);
     confirm.present();
 
 

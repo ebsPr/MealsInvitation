@@ -54,10 +54,16 @@ export class NewPage {
     this.people = Array.from(this.gochosService.getGochos());
   }
 
+
+
   // METHODS
 
   // update form with the correct inputs depending of dates
   updateArrayDays(){
+
+    // update end date adding 2 days 
+    this.endDate = moment(this.initDate).add(2,'days').format(this.formatEEUU);
+
     let nextFriday = moment(this.initDate,this.formatEEUU);
     let nextSunday =  moment(this.endDate,this.formatEEUU);
     this.arrayDays = this.datesService.getArrayDayObjects(nextFriday.toDate(),nextSunday.toDate());
@@ -83,8 +89,9 @@ export class NewPage {
             console.log('people - ',this.people)
             this.fireBaseService.saveMeal(this.arrayDays,this.people).subscribe(data => {
               console.log('ok!')
+              this.navCtrl.push(HomePage)
             })
-            this.navCtrl.push(HomePage)
+            
           }
         }
       ]

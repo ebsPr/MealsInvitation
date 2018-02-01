@@ -20,7 +20,7 @@
                         {{meals[key] | datemeal}}
                     </ion-col>
                     <ion-col col-2>
-                            <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                            <ion-icon ios="ios-trash" md="md-trash" (click)="deleteMeal(key)"></ion-icon>
                     </ion-col>
                 </ion-row>
             </ion-grid>

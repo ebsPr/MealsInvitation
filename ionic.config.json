@@ -1,6 +1,6 @@
 {
   "name": "ArosMeals",
-  "app_id": "",
+  "app_id": "8e33070a",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

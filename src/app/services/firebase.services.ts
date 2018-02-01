@@ -16,7 +16,8 @@ export class FirebaseService {
 
     url: string = 'https://meals-34def.firebaseio.com/meals'
     headers = new Headers({
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Cache-Control': 'no-cache'
       });
 
     // save de a meal
@@ -29,7 +30,7 @@ export class FirebaseService {
         
         return this.http.post(this.url+'.json',body, {headers:this.headers})
             .map( res => {
-            console.log(res.json())
+            console.log('saved!!!',res.json())
             return res.json()
             });
     }
@@ -44,7 +45,7 @@ export class FirebaseService {
     // delete
     deleteMeal(key$){
         let url = `${this.url}/${key$}.json`;
-        this.http.delete(url).map( res => res.json());
+        return this.http.delete(url).map( res => res.json());
     }
 
 

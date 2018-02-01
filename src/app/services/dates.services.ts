@@ -70,9 +70,14 @@ export class DatesService {
     }
 
     validateDates(dataWeekends,date){
+        console.log('inside validate dates',dataWeekends)
+        console.log('inside validate dates',date)
         return  dataWeekends.find(x => {
             let date1 = moment(x.date).format(this.formatEEUU);
             let date2 = moment(date).format(this.formatEEUU);
+            console.log('compare1: ',date1);
+            console.log('compare2: ',date2);
+            console.log('result: ',date1 === date2);
             return date1 === date2
           }) === undefined;
     }

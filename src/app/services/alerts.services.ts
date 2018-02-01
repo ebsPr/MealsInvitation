@@ -54,19 +54,13 @@ export class AlertsService {
 
     getAlertValidationDates(){
       return this.alertCtrl.create({
-        title: 'Use this lightsaber?',
-        message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+        title: 'Ya existe una comida para estas fechas',
+        message: 'Elige otra fecha porque la que has elegido se solapa con otra ya organizada',
         buttons: [
           {
-            text: 'Disagree',
+            text: 'Vale, lo reviso',
             handler: () => {
               console.log('Disagree clicked');
-            }
-          },
-          {
-            text: 'Agree',
-            handler: () => {
-              console.log('Agree clicked');
             }
           }
         ]

@@ -54,7 +54,7 @@ export class NewPage implements OnInit{
   }
 
   ngOnInit() {
-    console.log('constructor')
+
     new Promise((resolve, reject) => {
       console.log(' before meals')
       this.fireBaseService.getMeals().subscribe( data => {
@@ -81,9 +81,9 @@ export class NewPage implements OnInit{
   // METHODS
 
   validateDate(){
+    console.log('validateDates new ',this.loading)
     if(this.loading === false){
-      
-      if(this.datesService.validateDates(this.dataWeekends,this.initDate)){
+      if(!this.datesService.validateDates(this.dataWeekends,moment(this.initDate,this.formatEEUU).toDate())){
         // console.log('equalDay',equalDay);
         let confirm = this.alertService.getAlertValidationDates();;
         confirm.present();

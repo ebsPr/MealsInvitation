@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Day } from '../classes/day.classes';
+import * as moment from "moment";
 // import { Day } from "../classes/day.classes";
 
 @Injectable()
 export class DatesService {
+
+    formatEEUU: string = 'YYYY-MM-DD';
 
     constructor() {
 
@@ -28,6 +31,25 @@ export class DatesService {
             currentDate = addDays.call(currentDate, 1);
         }
         console.log('getArrayDates',dates)
+        return result;
+    }
+
+    getNextWeekend(){
+        // days until next friday
+        let diff = 5 - moment().day();
+        
+        // dates in moment format
+        let nextFriday = moment().add(diff, 'days');
+        let nextSunday = nextFriday.clone().add(2, 'days');
+
+        // parse dates for view
+        let result ={
+            nextFriday: nextFriday,
+            nextFridayTxt: nextFriday.format(this.formatEEUU),
+            nextSunday: nextSunday,
+            nextSundayTxt: nextSunday.format(this.formatEEUU)
+        }; 
+
         return result;
     }
 }

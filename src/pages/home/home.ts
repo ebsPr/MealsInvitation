@@ -62,7 +62,7 @@ export class HomePage implements OnInit{
           }
         },
         {
-          text: 'Si!',
+          text: 'Si, elimina!',
           handler: () => {
             console.log('Agree clicked');
             this.firebaseService.deleteMeal(key$).subscribe(data => console.log('delete ok ',data))

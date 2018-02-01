@@ -10,10 +10,10 @@ export class GochosService {
 
     getGochos():Person[]{
         return [
-            { id: '1', name: 'Iván',selected:true,attendance:null},
-            { id: '2', name : 'Yago',selected:true,attendance:null},
-            { id: '3', name: 'Ángel',selected:true,attendance:null},
-            { id: '4', name: 'Víctor',selected:true,attendance:null}
+            { id: '1', name: 'Iván',selected:true,attendance:'undefined'},
+            { id: '2', name : 'Yago',selected:true,attendance:'undefined'},
+            { id: '3', name: 'Ángel',selected:true,attendance:'undefined'},
+            { id: '4', name: 'Víctor',selected:true,attendance:'undefined'}
         ]
     }
 }

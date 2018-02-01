@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 
-import { Day } from "../../app/classes/day.classes";
-
 @Injectable()
 export class AlertsService {
 
@@ -39,6 +37,7 @@ export class AlertsService {
             buttons: [
               {
                 text: 'No, me he equivocado!',
+                
                 handler: () => {
                     handlerKo()
                 }

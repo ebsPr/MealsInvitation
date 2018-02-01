@@ -53,7 +53,16 @@ export class HomePage implements OnInit{
 
   // method that returns if a person has been selected to send the meal notification
   thumbs(people: Person[], id:string){
-    return people.find( x => x.id == id).selected;
+    let p = people.find( x => x.id == id);
+    if(p.selected && p.attendance === 'true'){
+      return 1 // thumbs up
+    }else if( p.selected && p.attendance === 'false'){
+      return 2 // thumps down
+    }else if (p.selected && p.attendance === 'undefined'){
+      return 3; // question mark
+    }else {
+      return 4 // cross, p is not invited
+    }
   }
 
   // method that calls delete service

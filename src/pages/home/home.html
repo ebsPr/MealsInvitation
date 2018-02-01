@@ -65,8 +65,11 @@
                             </ion-col>
                             <ion-col col-4>
                                 <span *ngIf="day.lunch.activated">
-                                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.lunch.people,p.id)"></ion-icon>
-                                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="!thumbs(day.lunch.people,p.id)"></ion-icon>
+                                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.lunch.people,p.id) === 1"></ion-icon>
+                                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="thumbs(day.lunch.people,p.id) === 2"></ion-icon>
+                                    <ion-icon ios="ios-help" md="md-help" *ngIf="thumbs(day.lunch.people,p.id) === 3"></ion-icon>
+                                    <ion-icon ios="ios-close" md="md-close" *ngIf="thumbs(day.lunch.people,p.id) === 4"></ion-icon>
+
                                 </span>
                                 <span *ngIf="!day.lunch.activated">
                                     <ion-icon ios="ios-remove" md="md-remove"></ion-icon>
@@ -74,8 +77,10 @@
                             </ion-col>
                             <ion-col col-4>
                                 <span *ngIf="day.dinner.activated">
-                                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.dinner.people,p.id)"></ion-icon>
-                                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="!thumbs(day.dinner.people,p.id)"></ion-icon>
+                                        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" *ngIf="thumbs(day.dinner.people,p.id) === 1"></ion-icon>
+                                        <ion-icon ios="ios-thumbs-down" md="md-thumbs-down" *ngIf="thumbs(day.dinner.people,p.id) === 2"></ion-icon>
+                                        <ion-icon ios="ios-help" md="md-help" *ngIf="thumbs(day.dinner.people,p.id) === 3"></ion-icon>
+                                        <ion-icon ios="ios-close" md="md-close" *ngIf="thumbs(day.dinner.people,p.id) === 4"></ion-icon>
                                 </span>
                                 <span *ngIf="!day.dinner.activated">
                                     <ion-icon ios="ios-remove" md="md-remove"></ion-icon>

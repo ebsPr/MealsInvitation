@@ -30,8 +30,7 @@ export class FirebaseService {
         
         return this.http.post(this.url+'.json',body, {headers:this.headers})
             .map( res => {
-            console.log('saved!!!',res.json())
-            return res.json()
+                return res.json()
             });
     }
 

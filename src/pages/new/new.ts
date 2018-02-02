@@ -30,7 +30,7 @@ export class NewPage implements OnInit{
 
   dataWeekends;
 
-  loading:boolean = true;
+  loading:number = 0;
 
   formatEEUU: string = 'YYYY-MM-DD';
   formatEEUU2: string = 'MM/DD/YYYY';
@@ -56,14 +56,14 @@ export class NewPage implements OnInit{
   ngOnInit() {
 
     new Promise((resolve, reject) => {
-      console.log(' before meals')
       this.fireBaseService.getMeals().subscribe( data => {
-        this.dataWeekends = _.flatMap(data, x => { return x} );
-        console.log('  meals ended')
+        this.dataWeekends = _.flatMap(data, x => { 
+          return { init: x[0].date, end: x[x.length-1].date}
+        } );
         resolve()
       });
     }).then( () => {
-      console.log('init then')
+
       let datesValue = this.datesService.getNextWeekend(this.dataWeekends);
 
       // dates for view
@@ -74,31 +74,35 @@ export class NewPage implements OnInit{
       this.arrayDays = this.datesService.getArrayDayObjects(datesValue.nextFriday.toDate(),datesValue.nextSunday.toDate());
   
       this.people = Array.from(this.gochosService.getGochos());
-      console.log('end then')
+
     });
   }
 
   // METHODS
 
   validateDate(){
-    console.log('validateDates new ',this.loading)
-    if(this.loading === false){
-      if(!this.datesService.validateDates(this.dataWeekends,moment(this.initDate,this.formatEEUU).toDate())){
-        // console.log('equalDay',equalDay);
-        let confirm = this.alertService.getAlertValidationDates();;
-        confirm.present();
-      }else{
-        // console.log('NOT FOUND')
+
+    if(this.loading > 2){
+      let initDateMoment = moment(this.initDate,this.formatEEUU);
+      let endDateMoment = moment(this.endDate,this.formatEEUU);
+      if(!this.datesService.validateDates2(this.dataWeekends,initDateMoment,endDateMoment)){
+        let confirm = this.alertService.getAlertValidationDates();
+        if(confirm)
+          confirm.present();
+        
+        console.log('test')
       }
     }
-    this.loading = false;
+    this.loading++;
   }
   // update form with the correct inputs depending of dates
   updateArrayDays(){
-    console.log('updateArrayDays',)
+
+    let initDateMoment = moment(this.initDate);
+    let diff = initDateMoment.day ()== 6 ? 1 : 2;
 
     // update end date adding 2 days 
-    this.endDate = moment(this.initDate).add(2,'days').format(this.formatEEUU);
+    this.endDate = initDateMoment.add(diff,'days').format(this.formatEEUU);
 
     let nextFriday = moment(this.initDate,this.formatEEUU);
     let nextSunday =  moment(this.endDate,this.formatEEUU);
@@ -109,10 +113,7 @@ export class NewPage implements OnInit{
   // method that save into firebase database the meal
   save(forma:NgForm) {
     
-    let handlerOk = () => {
-      console.log('arrayDays - ',this.arrayDays);
-      console.log('people - ',this.people)
- 
+    let handlerOk = () => { 
       this.loader.present();
       this.fireBaseService.saveMeal(this.arrayDays,this.people)
         .subscribe(data => {

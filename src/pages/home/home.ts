@@ -34,7 +34,7 @@ export class HomePage implements OnInit{
     private alertService: AlertsService,
     private loadingCtrl: LoadingController
   ) {
-    console.log('constructor home')
+
     // get weekends data
     this.getData(undefined)
     // get people data
@@ -42,7 +42,7 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(){
-    console.log('onInit home')
+    
   }
 
   // method that navigate to new meal page
@@ -79,7 +79,6 @@ export class HomePage implements OnInit{
       this.createLoading();
       this.firebaseService.deleteMeal(key$)
         .subscribe(data => {
-          console.log('delete ok ',data);
           delete this.meals [key$]
           this.removeLoading();
         });

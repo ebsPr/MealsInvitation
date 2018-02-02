@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Day } from '../classes/day.classes';
-import * as moment from "moment";
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+ 
+const moment = extendMoment(Moment);
+
 // import { Day } from "../classes/day.classes";
 
 @Injectable()
@@ -30,7 +34,6 @@ export class DatesService {
             });
             currentDate = addDays.call(currentDate, 1);
         }
-        console.log('getArrayDates',dates)
         return result;
     }
 
@@ -39,13 +42,14 @@ export class DatesService {
         let diff = 5 - moment().day();
         
         // dates in moment format
-        let nextFriday = moment().add(diff, 'days');
+        let nextFriday = moment().add(diff, 'days').startOf('day');
+        let nextSunday = nextFriday.clone().add(2, 'days');
 
-        if(!this.validateDates(dataWeekends,nextFriday.toDate())){
-            nextFriday = this.getNextFridayFree(dataWeekends,nextFriday);
+        if(!this.validateDates2(dataWeekends,nextFriday,nextSunday)){
+            nextFriday = this.getNextFridayFree(dataWeekends,nextFriday,nextSunday);
         }
 
-        let nextSunday = nextFriday.clone().add(2, 'days');
+        
 
         // parse dates for view
         let result ={
@@ -59,26 +63,24 @@ export class DatesService {
     }
 
     // recursive method to get the first free friday
-    getNextFridayFree(dataWeekends,date){
-        console.log('getNextFridayFree',date)
-        if(!this.validateDates(dataWeekends,date.toDate())){
-            return this.getNextFridayFree(dataWeekends,date.add(7,'days'))
+    getNextFridayFree(dataWeekends,date,date2){
+        if(!this.validateDates2(dataWeekends,date,date2)){
+            return this.getNextFridayFree(dataWeekends,date.add(7,'days'),date2.add(9,'days'));
         }else{
-            console.log('getNextFridayFree return ',date)
             return date;
         }
     }
 
-    validateDates(dataWeekends,date){
-        console.log('inside validate dates',dataWeekends)
-        console.log('inside validate dates',date)
-        return  dataWeekends.find(x => {
-            let date1 = moment(x.date).format(this.formatEEUU);
-            let date2 = moment(date).format(this.formatEEUU);
-            console.log('compare1: ',date1);
-            console.log('compare2: ',date2);
-            console.log('result: ',date1 === date2);
-            return date1 === date2
-          }) === undefined;
+    validateDates2(dataWeekends,date1,date2){
+        let range1 = moment.range(date1,date2);
+        let result = dataWeekends.find(x => {
+                let init = moment(x.init);
+                let end = moment(x.end);
+                let range2 = moment.range(init,end)
+                return range1.overlaps(range2);
+        });
+        return result === undefined && !date1.isBefore(moment().startOf('day'));
     }
+
+    
 }

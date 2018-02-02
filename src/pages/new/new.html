@@ -21,7 +21,7 @@
 
       <ion-item class="new-card-content">
         <ion-label floating>FechaFin</ion-label>
-        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="endDate" name="endDate" (ionChange)='updateArrayDays()' ></ion-datetime>
+        <ion-datetime displayFormat="DDDD DD/MM/YYYY" [(ngModel)]="endDate" name="endDate" (ionChange)='updateArrayDays();validateDate()' ></ion-datetime>
       </ion-item>
     </ion-card-content>
   </ion-card>

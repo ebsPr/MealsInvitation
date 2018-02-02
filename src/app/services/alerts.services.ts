@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController,Alert } from 'ionic-angular';
+import { Loading } from 'ionic-angular/components/loading/loading';
 
 @Injectable()
 export class AlertsService {
@@ -52,18 +53,27 @@ export class AlertsService {
           });
     }
 
+    validationLoading:Alert = null;
+
     getAlertValidationDates(){
-      return this.alertCtrl.create({
-        title: 'Ya existe una comida para estas fechas',
-        message: 'Elige otra fecha porque la que has elegido se solapa con otra ya organizada',
-        buttons: [
-          {
-            text: 'Vale, lo reviso',
-            handler: () => {
-              console.log('Disagree clicked');
+      if(this.validationLoading == null || this.validationLoading._state == 4){
+        this.validationLoading = this.alertCtrl.create({
+          title: 'Ya existe una comida para estas fechas',
+          message: 'Elige otra fecha porque la que has elegido se solapa con otra ya organizada',
+          buttons: [
+            {
+              text: 'Vale, lo reviso',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
             }
-          }
-        ]
-      });
+          ]
+        });
+      }
+      if(this.validationLoading._state == 3){
+        return undefined;
+      }
+      console.log('alert',this.validationLoading)
+      return this.validationLoading;
     }
 }
